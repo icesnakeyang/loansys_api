@@ -1,0 +1,12 @@
+server:
+  port: 8005
+spring:
+  datasource:
+    url: jdbc:postgresql://pgm-2vc85ouuoz41kx5fco.pgsql.cn-chengdu.rds.aliyuncs.com:5432/loansys
+    username: gogoyangsoft
+    password: 112233ccddEE
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  file:
+    name: logs/loansys.log

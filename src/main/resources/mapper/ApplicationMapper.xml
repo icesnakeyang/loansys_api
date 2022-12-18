@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.cdtime.loansys_api.dao.ApplicationDao">
+    <!--配置表和对象的字段映射 -->
+    <resultMap id="applicationMap" type="cc.cdtime.loansys_api.entity.ApplicationView">
+        <result property="adminId" column="admin_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="loginName" column="login_name"/>
+        <result property="loginPassword" column="login_password"/>
+        <result property="roleType" column="role_type"/>
+        <result property="tokenTime" column="token_time"/>
+    </resultMap>
+
+    <!--create loan application form-->
+    <insert id="createLoanApplication"
+            parameterType="cc.cdtime.loansys_api.entity.Application">
+        insert into application
+        (apply_id, your_name, contact_number, email,
+         loan_amount, personal_loan, business_loan,
+         collateralized_loan, balance_transfer, location,
+         job_title, employer_name, monthly_salary,
+         salary_method, user_id)
+        values (#{applyId}, #{yourName}, #{contactNumber}, #{email},
+                #{loanAmount}, #{personalLoan}, #{businessLoan},
+                #{collateralizedLoan}, #{balanceTransfer}, #{location},
+                #{jobTitle}, #{employerName}, #{monthlySalary},
+                #{salaryMethod}, #{userId})
+    </insert>
+
+    <!--    query user application record by email-->
+    <select id="getApplication" parameterType="java.lang.String" resultMap="applicationMap">
+        select *
+        from application
+        where email = #{email}
+    </select>
+</mapper>
