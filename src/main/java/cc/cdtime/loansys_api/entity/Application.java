@@ -2,6 +2,8 @@ package cc.cdtime.loansys_api.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * Loan Application Form
  */
@@ -23,4 +25,5 @@ public class Application {
     private Double monthlySalary;
     private String salaryMethod;
     private String userId;
+    private Date createTime;
 }

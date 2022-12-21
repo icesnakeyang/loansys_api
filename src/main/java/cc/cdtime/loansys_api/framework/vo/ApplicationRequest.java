@@ -3,7 +3,7 @@ package cc.cdtime.loansys_api.framework.vo;
 import lombok.Data;
 
 @Data
-public class ApplicationRequest {
+public class ApplicationRequest extends Request {
     private String yourName;
     private String contactNumber;
     private String email;

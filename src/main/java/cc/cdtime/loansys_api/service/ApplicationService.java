@@ -7,6 +7,7 @@ import cc.cdtime.loansys_api.framework.vo.GogoTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -55,6 +56,7 @@ public class ApplicationService implements IApplicationService {
         application.setSalaryMethod(salaryMethod);
         application.setYourName(yourName);
         application.setUserId(GogoTools.UUID32());
+        application.setCreateTime(new Date());
 
         applicationDao.createLoanApplication(application);
     }

@@ -3,12 +3,20 @@
 <mapper namespace="cc.cdtime.loansys_api.dao.ApplicationDao">
     <!--配置表和对象的字段映射 -->
     <resultMap id="applicationMap" type="cc.cdtime.loansys_api.entity.ApplicationView">
-        <result property="adminId" column="admin_id"/>
+        <result property="applyId" column="apply_id"/>
+        <result property="yourName" column="your_name"/>
+        <result property="contactNumber" column="contact_number"/>
+        <result property="loanAmount" column="loan_amount"/>
+        <result property="personalLoan" column="personal_loan"/>
+        <result property="jobTitle" column="job_title"/>
+        <result property="employerName" column="employer_name"/>
+        <result property="monthlySalary" column="monthly_salary"/>
+        <result property="salaryMethod" column="salary_method"/>
+        <result property="userId" column="user_id"/>
+        <result property="businessLoan" column="business_loan"/>
+        <result property="collateralizedLoan" column="collateralized_loan"/>
+        <result property="balanceTransfer" column="balance_transfer"/>
         <result property="createTime" column="create_time"/>
-        <result property="loginName" column="login_name"/>
-        <result property="loginPassword" column="login_password"/>
-        <result property="roleType" column="role_type"/>
-        <result property="tokenTime" column="token_time"/>
     </resultMap>
 
     <!--create loan application form-->
@@ -19,12 +27,12 @@
          loan_amount, personal_loan, business_loan,
          collateralized_loan, balance_transfer, location,
          job_title, employer_name, monthly_salary,
-         salary_method, user_id)
+         salary_method, user_id, create_time)
         values (#{applyId}, #{yourName}, #{contactNumber}, #{email},
                 #{loanAmount}, #{personalLoan}, #{businessLoan},
                 #{collateralizedLoan}, #{balanceTransfer}, #{location},
                 #{jobTitle}, #{employerName}, #{monthlySalary},
-                #{salaryMethod}, #{userId})
+                #{salaryMethod}, #{userId}, #{createTime})
     </insert>
 
     <!--    query user application record by email-->
@@ -32,5 +40,22 @@
         select *
         from application
         where email = #{email}
+    </select>
+
+    <select id="sumApplyLoan" parameterType="map" resultType="map">
+        select count(*) as total, sum(loan_amount) as total_amount
+        from application
+    </select>
+
+    <select id="listApplication" parameterType="map" resultMap="applicationMap">
+        select *
+        from application
+        where 1=1
+        order by ids desc
+        <choose>
+            <when test="offset!=null">
+                limit #{size} offset #{offset}
+            </when>
+        </choose>
     </select>
 </mapper>
