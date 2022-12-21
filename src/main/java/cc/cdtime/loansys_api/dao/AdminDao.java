@@ -4,6 +4,7 @@ import cc.cdtime.loansys_api.entity.Admin;
 import cc.cdtime.loansys_api.entity.AdminView;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Mapper
@@ -13,4 +14,6 @@ public interface AdminDao {
     AdminView getAdmin(Map qIn);
 
     void updateAdmin(Map qIn);
+
+    ArrayList<Map> loadExportFile1(Map qIn);
 }

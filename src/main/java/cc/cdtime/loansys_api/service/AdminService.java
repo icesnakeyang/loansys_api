@@ -116,6 +116,21 @@ public class AdminService implements IAdminService {
         return out;
     }
 
+    @Override
+    public Map loadExportData1(Map in) throws Exception {
+        String token = in.get("token").toString();
+
+        Map qIn = new HashMap();
+        qIn.put("token", token);
+        AdminView adminView = loadAdminUser(qIn, false);
+
+        ArrayList<Map> maps = adminDao.loadExportFile1(qIn);
+
+        Map out = new HashMap();
+        out.put("dataList", maps);
+        return out;
+    }
+
     private AdminView loadAdminUser(Map qIn, Boolean returnNull) throws Exception {
         AdminView adminView = adminDao.getAdmin(qIn);
         if (adminView == null) {

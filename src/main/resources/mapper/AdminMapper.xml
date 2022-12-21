@@ -52,4 +52,10 @@
         </set>
         where admin_id=#{adminId}
     </update>
+
+    <select id="loadExportFile1" parameterType="map" resultType="map">
+        select *
+        from application
+        order by ids desc
+    </select>
 </mapper>

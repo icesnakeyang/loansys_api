@@ -112,4 +112,29 @@ public class AdminController {
         }
         return response;
     }
+
+    @ResponseBody
+    @PostMapping("/loadExportData1")
+    public Response loadExportData1(@RequestBody ApplicationRequest request,
+                                        HttpServletRequest httpServletRequest) {
+        Response response = new Response();
+        Map in = new HashMap();
+        try {
+            String token = httpServletRequest.getHeader("token");
+            in.put("token", token);
+
+            Map out = iAdminService.loadExportData1(in);
+            response.setData(out);
+        } catch (Exception ex) {
+            try {
+                response.setCode(Integer.parseInt(ex.getMessage()));
+            } catch (Exception ex2) {
+                response.setCode(10001);
+                log.error("loadExportData1 error: " + ex.getMessage());
+            }
+        }
+        return response;
+    }
+
+
 }

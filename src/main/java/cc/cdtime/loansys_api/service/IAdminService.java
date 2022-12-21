@@ -15,4 +15,6 @@ public interface IAdminService {
     Map loadStatisticLoan(Map in) throws Exception;
 
     Map listLoanApplication(Map in) throws Exception;
+
+    Map loadExportData1(Map in) throws Exception;
 }
